@@ -149,42 +149,34 @@ namespace PackageBaselineGenerator
 
                     foreach (var group in reader.NuspecReader.GetDependencyGroups())
                     {
-                        // Don't bother outputing empty ItemGroup elements.
+                        // Don't bother generating empty ItemGroup elements.
                         if (group.Packages.Count() == 0)
                         {
                             continue;
                         }
 
-                        var itemGroup = new XElement("ItemGroup", new XAttribute("Condition", $" '$(PackageId)' == '{id}' AND '$(TargetFramework)' == '{group.TargetFramework.GetShortFolderName()}' "));
-                        doc.Root.Add(itemGroup);
-
-                        foreach (var dependency in group.Packages)
-                        {
-                            itemGroup.Add(new XElement("BaselinePackageReference", new XAttribute("Include", dependency.Id), new XAttribute("Version", dependency.VersionRange.ToString())));
-                        }
-
                         // Handle changes to $(DefaultNetCoreTargetFramework) even if some projects are held back.
+                        var targetCondition = $"'$(TargetFramework)' == '{group.TargetFramework.GetShortFolderName()}'";
                         if (string.Equals(
                             group.TargetFramework.GetShortFolderName(),
                             defaultTarget,
                             StringComparison.OrdinalIgnoreCase))
                         {
-                            var defaultTargetItemGroup = new XElement(
-                                "ItemGroup",
-                                new XAttribute(
-                                    "Condition",
-                                    " '$(PackageId)' == '{id}' AND '$(TargetFramework)' == " +
-                                    "'$(DefaultNetCoreTargetFramework)' AND '$(TargetFramework)' != " +
-                                    $"'{group.TargetFramework.GetShortFolderName()}' "));
-                            doc.Root.Add(defaultTargetItemGroup);
+                            targetCondition =
+                                $"('$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' OR {targetCondition})";
+                        }
 
-                            foreach (var dependency in group.Packages)
-                            {
-                                defaultTargetItemGroup.Add(new XElement(
-                                    "BaselinePackageReference",
-                                    new XAttribute("Include", dependency.Id),
-                                    new XAttribute("Version", dependency.VersionRange.ToString())));
-                            }
+                        var itemGroup = new XElement(
+                            "ItemGroup",
+                            new XAttribute("Condition", $" '$(PackageId)' == '{id}' AND {targetCondition} "));
+                        doc.Root.Add(itemGroup);
+
+                        foreach (var dependency in group.Packages)
+                        {
+                            itemGroup.Add(
+                                new XElement("BaselinePackageReference",
+                                new XAttribute("Include", dependency.Id),
+                                new XAttribute("Version", dependency.VersionRange.ToString())));
                         }
                     }
                 }
