@@ -158,11 +158,8 @@
           Exclude="@(Reference);@(_ProjectReferenceByAssemblyName);@(PackageReference)" />
 
       <!-- Only allow suppressing baseline changes in non-servicing builds. -->
-      <!--
-        Temporarily ignore the above. Restore Condition="'$(IsServicingBuild)' != 'true'" when
-        https://github.com/aspnet/AspNetCore/issues/14630 is resolved.
-      -->
-      <UnusedBaselinePackageReference Remove="@(SuppressBaselineReference)" />
+      <UnusedBaselinePackageReference Remove="@(SuppressBaselineReference)"
+          Condition=" '$(IsServicingBuild)' != 'true' " />
 
       <!--
         MSBuild does not provide a way to join on matching identities in a Condition,
