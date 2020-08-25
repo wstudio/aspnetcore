@@ -21,8 +21,7 @@ namespace Microsoft.JSInterop
                 id => new JSInProcessObjectReference(this, id)));
         }
 
-        [return: MaybeNull]
-        internal TValue Invoke<TValue>(string identifier, long targetInstanceId, params object?[]? args)
+        internal TValue? Invoke<TValue>(string identifier, long targetInstanceId, params object?[]? args)
         {
             var resultJson = InvokeJS(
                 identifier,

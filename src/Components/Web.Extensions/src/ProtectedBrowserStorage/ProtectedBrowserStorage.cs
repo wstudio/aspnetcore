@@ -155,7 +155,7 @@ namespace Microsoft.AspNetCore.Components.Web.Extensions
         private ValueTask SetProtectedJsonAsync(string key, string protectedJson)
            => _jsRuntime.InvokeVoidAsync($"{_storeName}.setItem", key, protectedJson);
 
-        private ValueTask<string> GetProtectedJsonAsync(string key)
+        private ValueTask<string?> GetProtectedJsonAsync(string key)
             => _jsRuntime.InvokeAsync<string>($"{_storeName}.getItem", key);
 
         // IDataProtect isn't disposable, so we're fine holding these indefinitely.

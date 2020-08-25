@@ -34,7 +34,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
 
         /// <inheritdoc />
-        protected override string FormatValueAsString([AllowNull] TValue value)
+        protected override string FormatValueAsString(TValue? value)
         {
             switch (value)
             {
@@ -48,7 +48,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
 
         /// <inheritdoc />
-        protected override bool TryParseValueFromString(string? value, [MaybeNull] out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
+        protected override bool TryParseValueFromString(string? value, out TValue? result, [NotNullWhen(false)] out string? validationErrorMessage)
         {
             // Unwrap nullable types. We don't have to deal with receiving empty values for nullable
             // types here, because the underlying InputBase already covers that.

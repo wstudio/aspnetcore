@@ -17,7 +17,7 @@ namespace Microsoft.JSInterop
         /// <typeparam name="TResult">The .NET type corresponding to the function's return value type.</typeparam>
         /// <param name="identifier">The identifier used when registering the target function.</param>
         /// <returns>The result of the function invocation.</returns>
-        TResult InvokeUnmarshalled<TResult>(string identifier);
+        TResult? InvokeUnmarshalled<TResult>(string identifier);
 
         /// <summary>
         /// Invokes the JavaScript function registered with the specified identifier.
@@ -27,7 +27,7 @@ namespace Microsoft.JSInterop
         /// <param name="identifier">The identifier used when registering the target function.</param>
         /// <param name="arg0">The first argument.</param>
         /// <returns>The result of the function invocation.</returns>
-        TResult InvokeUnmarshalled<T0, TResult>(string identifier, T0 arg0);
+        TResult? InvokeUnmarshalled<T0, TResult>(string identifier, T0 arg0);
 
         /// <summary>
         /// Invokes the JavaScript function registered with the specified identifier.
@@ -39,7 +39,7 @@ namespace Microsoft.JSInterop
         /// <param name="arg0">The first argument.</param>
         /// <param name="arg1">The second argument.</param>
         /// <returns>The result of the function invocation.</returns>
-        TResult InvokeUnmarshalled<T0, T1, TResult>(string identifier, T0 arg0, T1 arg1);
+        TResult? InvokeUnmarshalled<T0, T1, TResult>(string identifier, T0 arg0, T1 arg1);
 
         /// <summary>
         /// Invokes the JavaScript function registered with the specified identifier.
@@ -53,6 +53,6 @@ namespace Microsoft.JSInterop
         /// <param name="arg1">The second argument.</param>
         /// <param name="arg2">The third argument.</param>
         /// <returns>The result of the function invocation.</returns>
-        TResult InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2);
+        TResult? InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2);
     }
 }

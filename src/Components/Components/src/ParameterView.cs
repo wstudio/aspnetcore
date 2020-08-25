@@ -88,8 +88,7 @@ namespace Microsoft.AspNetCore.Components
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns>The parameter value if found; otherwise the default value for the specified type.</returns>
-        [return: MaybeNull]
-        public TValue GetValueOrDefault<TValue>(string parameterName)
+        public TValue? GetValueOrDefault<TValue>(string parameterName)
             => GetValueOrDefault<TValue>(parameterName, default!);
 
         /// <summary>
@@ -101,7 +100,7 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="defaultValue">The default value to return if no such parameter exists in the collection.</param>
         /// <returns>The parameter value if found; otherwise <paramref name="defaultValue"/>.</returns>
         public TValue GetValueOrDefault<TValue>(string parameterName, TValue defaultValue)
-            => TryGetValue<TValue>(parameterName, out TValue result) ? result : defaultValue;
+            => TryGetValue<TValue>(parameterName, out var result) ? result : defaultValue;
 
         /// <summary>
         /// Returns a dictionary populated with the contents of the <see cref="ParameterView"/>.
