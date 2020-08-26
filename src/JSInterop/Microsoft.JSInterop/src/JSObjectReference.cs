@@ -50,7 +50,7 @@ namespace Microsoft.JSInterop
         /// <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>someScope.someFunction</c> on the target instance.</param>
         /// <param name="args">JSON-serializable arguments.</param>
         /// <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        public ValueTask<TValue?> InvokeAsync<TValue>(string identifier, params object[] args)
+        public ValueTask<TValue?> InvokeAsync<TValue>(string identifier, params object?[]? args)
         {
             ThrowIfDisposed();
 
@@ -68,7 +68,7 @@ namespace Microsoft.JSInterop
         /// </param>
         /// <param name="args">JSON-serializable arguments.</param>
         /// <returns>An instance of <typeparamref name="TValue"/> obtained by JSON-deserializing the return value.</returns>
-        public ValueTask<TValue?> InvokeAsync<TValue>(string identifier, CancellationToken cancellationToken, params object[] args)
+        public ValueTask<TValue?> InvokeAsync<TValue>(string identifier, CancellationToken cancellationToken, params object?[]? args)
         {
             ThrowIfDisposed();
 

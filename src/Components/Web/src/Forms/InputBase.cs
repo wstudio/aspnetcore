@@ -36,7 +36,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// @bind-Value="model.PropertyName"
         /// </example>
         [Parameter]
-        public TValue? Value { get; set; } = default;
+        public TValue? Value { get; set; }
 
         /// <summary>
         /// Gets or sets a callback that updates the bound value.

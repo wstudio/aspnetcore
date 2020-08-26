@@ -111,7 +111,7 @@ namespace Microsoft.JSInterop
         {
             var taskId = Interlocked.Increment(ref _nextPendingTaskId);
             var tcs = new TaskCompletionSource<TValue?>(TaskContinuationOptions.RunContinuationsAsynchronously);
-            if (cancellationToken != default)
+            if (cancellationToken.CanBeCanceled)
             {
                 _cancellationRegistrations[taskId] = cancellationToken.Register(() =>
                 {
