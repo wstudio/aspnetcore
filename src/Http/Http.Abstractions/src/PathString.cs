@@ -20,14 +20,14 @@ namespace Microsoft.AspNetCore.Http
         /// </summary>
         public static readonly PathString Empty = new PathString(string.Empty);
 
-        private readonly string? _value;
+        private readonly string _value;
 
         /// <summary>
         /// Initialize the path string with a given value. This value must be in unescaped format. Use
         /// PathString.FromUriComponent(value) if you have a path value which is in an escaped format.
         /// </summary>
         /// <param name="value">The unescaped path to be assigned to the Value property.</param>
-        public PathString(string? value)
+        public PathString(string value)
         {
             if (!string.IsNullOrEmpty(value) && value[0] != '/')
             {
@@ -39,7 +39,7 @@ namespace Microsoft.AspNetCore.Http
         /// <summary>
         /// The unescaped path value
         /// </summary>
-        public string? Value
+        public string Value
         {
             get { return _value; }
         }
@@ -468,7 +468,7 @@ namespace Microsoft.AspNetCore.Http
             => path.ToString();
 
         internal static PathString ConvertFromString(string? s)
-            => string.IsNullOrEmpty(s) ? new PathString(s) : FromUriComponent(s);
+            => string.IsNullOrEmpty(s) ? new PathString(s!) : FromUriComponent(s);
     }
 
     internal sealed class PathStringConverter : TypeConverter

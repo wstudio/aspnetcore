@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Encodings.Web;
 using Microsoft.Extensions.Primitives;
@@ -25,7 +24,7 @@ namespace Microsoft.AspNetCore.Http
         /// a leading '?' character. 
         /// </summary>
         /// <param name="value">The query string to be assigned to the Value property.</param>
-        public QueryString(string? value)
+        public QueryString(string value)
         {
             if (!string.IsNullOrEmpty(value) && value[0] != '?')
             {
@@ -37,7 +36,7 @@ namespace Microsoft.AspNetCore.Http
         /// <summary>
         /// The escaped query string with the leading '?' character
         /// </summary>
-        public string? Value { get; }
+        public string Value { get; }
 
         /// <summary>
         /// True if the query string is not empty
