@@ -13,6 +13,9 @@
     <!-- Run on platforms where we support Selenium -->
     <SkipTests Condition="'$(SeleniumE2ETestsSupported)' != 'true'">true</SkipTests>
 
+    <!-- Tests are disabled due to https://github.com/dotnet/aspnetcore/issues/25322 -->
+    <SkipTests>true</SkipTests>
+
     <!-- Tests do not work on Helix or when bin/ directory is not in project directory due to undeclared dependency on test content. -->
     <BaseOutputPath />
 
