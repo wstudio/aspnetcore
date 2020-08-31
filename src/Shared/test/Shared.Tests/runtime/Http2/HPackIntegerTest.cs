@@ -56,11 +56,13 @@ namespace System.Net.Http.Unit.Tests.HPack
         {
             IntegerDecoder decoder = new IntegerDecoder();
 
-            Span<byte> integerBytes = stackalloc byte[5];
             for (int i = 0; i < 2048; ++i)
             {
                 for (int prefixLength = 1; prefixLength <= 8; ++prefixLength)
                 {
+#pragma warning disable CA2014 // Do not use stackalloc in loops
+                    Span<byte> integerBytes = stackalloc byte[5];
+#pragma warning restore CA2014 // Do not use stackalloc in loops
                     Assert.True(IntegerEncoder.Encode(i, prefixLength, integerBytes, out int length));
 
                     bool decodeResult = decoder.BeginTryDecode(integerBytes[0], prefixLength, out int intResult);
